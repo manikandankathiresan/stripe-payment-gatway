@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { addToCart } from "../slices/cartSlice";
 import Loader from "./Loader";
 import Carousel from "./Carousel";
+import { PRODUCTS_FAKE_API } from "../config";
 
 const Home = () => {
   const [products, setProducts] = useState(null);
@@ -18,7 +19,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_PRODUCTS_FAKE_API)
+    fetch(PRODUCTS_FAKE_API)
       .then(res => res.json())
       .then(json => {
         setProducts(json);

@@ -12,6 +12,7 @@ import {
 
 import { Link } from "react-router-dom";
 import DebitCard from "./DebitCard";
+import { API_BASE_URL, API_VERSION_PATH, STRIPE_API_KEY } from '../config';
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -39,7 +40,7 @@ const Cart = () => {
 
 
   const makePayment = async () => {
-    const stripe = await loadStripe(process.env.REACT_APP_STRIPE_PUBLISHER_KEY);
+    const stripe = await loadStripe(STRIPE_API_KEY);
     const body = {
       products: cart
     }
@@ -47,7 +48,7 @@ const Cart = () => {
       'Content-Type': 'application/json'
     }
 
-    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/${process.env.REACT_APP_API_VERSION_PATH}/create-checkout-session`, {
+    const response = await fetch(`${API_BASE_URL}/${API_VERSION_PATH}/create-checkout-session`, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(body)
